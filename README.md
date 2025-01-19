@@ -1,2 +1,2 @@
 # Ready or Not Responsive System
- A simple Responsive System from Ready or Not.
+Add a simple Responsive System from Ready or Not to Garry's Mod.
