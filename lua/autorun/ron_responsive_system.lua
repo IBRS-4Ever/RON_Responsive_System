@@ -1,4 +1,6 @@
 
+CreateConVar( "ron_responsive_system_enabled", 1 , FCVAR_ARCHIVE + FCVAR_SERVER_CAN_EXECUTE + FCVAR_REPLICATED, "[RON Responsive System] Enable System.")
+
 local function PlayerAnnounce( Sound )
 	for i, player in ipairs( player.GetAll() ) do
 		player:EmitSound( Sound, 75, 100, 1, CHAN_VOICE )
@@ -28,6 +30,7 @@ local function Judge_Speak( Sound, Delay )
 end
 
 hook.Add( "OnNPCKilled", "RON_Responsive_System_NPCKilled", function( npc, attacker, inflictor )
+	if !GetConVar("ron_responsive_system_enabled"):GetBool() then return end
 	if attacker:IsPlayer() then 
 		if npc:Disposition( attacker ) == D_LI then
 			local CivilianKilled = "ready_or_not/swatjudge/ReportDeadCivilian_"..math.random(1,11)..".wav"
@@ -60,6 +63,7 @@ hook.Add( "OnNPCKilled", "RON_Responsive_System_NPCKilled", function( npc, attac
 end)
 
 hook.Add( "PlayerDeath", "RON_Responsive_System_PlayerDead", function( victim, inflictor, attacker )
+	if !GetConVar("ron_responsive_system_enabled"):GetBool() then return end
 	timer.Simple( 1, function() 
 		local Death = "ready_or_not/toc/Failed_"..math.random(0,13)..".wav"
 		PlayerAnnounce( Death )
@@ -67,6 +71,7 @@ hook.Add( "PlayerDeath", "RON_Responsive_System_PlayerDead", function( victim, i
 end)
 
 hook.Add( "PlayerSpawn", "RON_Responsive_System_PlayerSpawn", function( victim, inflictor, attacker )
+	if !GetConVar("ron_responsive_system_enabled"):GetBool() then return end
 	timer.Simple( 1, function() 
 		local Prefix = "ready_or_not/toc/Prefix_"..math.random(0,21)..".wav"
 		PlayerAnnounce( Prefix )
