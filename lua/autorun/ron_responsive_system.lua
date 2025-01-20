@@ -9,7 +9,7 @@ end
 
 local function TOC_Speak( Sound, Delay )
 	timer.Simple( Delay or 1, function() 
-		local Prefix = "ready_or_not/toc/Prefix_"..math.random(0,21)..".wav"
+		local Prefix = "ready_or_not/toc/prefix_"..math.random(0,21)..".wav"
 		PlayerAnnounce( Prefix )
 		
 		timer.Simple( SoundDuration( Prefix ), function() 
@@ -20,7 +20,7 @@ end
 
 local function Judge_Speak( Sound, Delay )
 	timer.Simple( Delay or 1, function() 
-		local Prefix = "ready_or_not/swatjudge/PrefixTOC_"..math.random(0,3)..".wav"
+		local Prefix = "ready_or_not/swatjudge/prefixtoc_"..math.random(0,3)..".wav"
 		PlayerAnnounce( Prefix )
 		
 		timer.Simple( SoundDuration( Prefix ), function() 
@@ -33,15 +33,15 @@ hook.Add( "OnNPCKilled", "RON_Responsive_System_NPCKilled", function( npc, attac
 	if !GetConVar("ron_responsive_system_enabled"):GetBool() then return end
 	if attacker:IsPlayer() then 
 		if npc:Disposition( attacker ) == D_LI then
-			local CivilianKilled = "ready_or_not/swatjudge/ReportDeadCivilian_"..math.random(1,11)..".wav"
+			local CivilianKilled = "ready_or_not/swatjudge/reportdeadcivilian_"..math.random(1,11)..".wav"
 			Judge_Speak(CivilianKilled)
 			
 			timer.Simple( SoundDuration( CivilianKilled ) + 1, function() 
-				local ROEViolate = "ready_or_not/toc/ROEViolate_"..math.random(0,25)..".wav"
+				local ROEViolate = "ready_or_not/toc/roeviolate_"..math.random(0,25)..".wav"
 				TOC_Speak(ROEViolate)
 			end)
 		else
-			local SuspectKilled = "ready_or_not/swatjudge/SuspectKilled_"..math.random(0,4)..".wav"
+			local SuspectKilled = "ready_or_not/swatjudge/suspectkilled_"..math.random(0,4)..".wav"
 			Judge_Speak(SuspectKilled)
 			
 			timer.Simple( SoundDuration( SuspectKilled ) + 1, function() 
@@ -55,7 +55,7 @@ hook.Add( "OnNPCKilled", "RON_Responsive_System_NPCKilled", function( npc, attac
 	else
 		if npc:Disposition( player.GetAll()[1] ) == D_LI then
 			timer.Simple( 1, function() 
-				local HostageKilled = "ready_or_not/toc/HostageKilled_"..math.random(0,9)..".wav"
+				local HostageKilled = "ready_or_not/toc/hostagekilled_"..math.random(0,9)..".wav"
 				PlayerAnnounce( HostageKilled )
 			end)
 		end
@@ -65,18 +65,35 @@ end)
 hook.Add( "PlayerDeath", "RON_Responsive_System_PlayerDead", function( victim, inflictor, attacker )
 	if !GetConVar("ron_responsive_system_enabled"):GetBool() then return end
 	timer.Simple( 1, function() 
-		local Death = "ready_or_not/toc/Failed_"..math.random(0,13)..".wav"
+		local Death = "ready_or_not/toc/failed_"..math.random(0,13)..".wav"
 		PlayerAnnounce( Death )
 	end)
 end)
 
 hook.Add( "PlayerSpawn", "RON_Responsive_System_PlayerSpawn", function( victim, inflictor, attacker )
 	if !GetConVar("ron_responsive_system_enabled"):GetBool() then return end
-	timer.Simple( 1, function() 
-		local Prefix = "ready_or_not/toc/Prefix_"..math.random(0,21)..".wav"
-		PlayerAnnounce( Prefix )
-		timer.Simple( SoundDuration( Prefix ), function() 
-			PlayerAnnounce( "ready_or_not/toc/BarricadedSuspectsStart_"..math.random(0,8)..".wav" )
-		end)
+	local Start = "ready_or_not/toc/barricadedsuspectsstart_"..math.random(0,8)..".wav"
+	TOC_Speak(Start)
+end)
+
+
+hook.Add("AddToolMenuTabs", "RON_RESPONSIVE_SYSTEM_ADDMENU", function()
+	spawnmenu.AddToolCategory("Options", "RON Responsive System Settings", "#ron.menu.ron_settings")
+end)
+
+hook.Add("PopulateToolMenu","RON_RESPONSIVE_SYSTEM_MENU",function()
+	spawnmenu.AddToolMenuOption("Options", "RON Responsive System Settings", "RON_Settings", "#ron.menu.settings","","",function(pnl)
+		if game.SinglePlayer() or LocalPlayer():IsAdmin() then pnl:AddControl("Checkbox", {Label = "#ron.menu.settings.enabled", Command = "ron_responsive_system_enabled"}) end
+		pnl:AddControl("Checkbox", {Label = "#ron.menu.settings.subtitles", Command = "ron_responsive_system_subtitle"})
+		local LanguageComboBox = vgui.Create("DComboBox")
+		LanguageComboBox:SetSize(100, 30)
+		LanguageComboBox:SetValue("#ron.menu.subtitles_choose_language")
+		LanguageComboBox:AddChoice("English", "english", false, "flags16/us.png")
+		LanguageComboBox:AddChoice("简体中文", "schinese", false, "flags16/cn.png")
+		LanguageComboBox.OnSelect = function( index, text, data )
+			RunConsoleCommand("ron_responsive_system_subtitle_language", LanguageComboBox:GetOptionData(text))
+			RunConsoleCommand("ron_subtitles_reload")
+		end
+		pnl:AddPanel(LanguageComboBox)
 	end)
 end)
