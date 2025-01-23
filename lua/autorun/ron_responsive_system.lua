@@ -1,6 +1,8 @@
 
 CreateConVar( "ron_responsive_system_enabled", 1 , FCVAR_ARCHIVE + FCVAR_SERVER_CAN_EXECUTE + FCVAR_REPLICATED, "[RON Responsive System] Enable System.")
 
+local Speaking = false
+
 local function PlayerAnnounce( Sound )
 	for i, player in ipairs( player.GetAll() ) do
 		player:EmitSound( Sound, 75, 100, 1, CHAN_VOICE )
@@ -31,6 +33,8 @@ end
 
 hook.Add( "OnNPCKilled", "RON_Responsive_System_NPCKilled", function( npc, attacker, inflictor )
 	if !GetConVar("ron_responsive_system_enabled"):GetBool() then return end
+	if Speaking then return end
+	Speaking = true
 	if attacker:IsPlayer() then 
 		if npc:Disposition( attacker ) == D_LI then
 			local CivilianKilled = "ready_or_not/swatjudge/reportdeadcivilian_"..math.random(1,11)..".wav"
@@ -39,17 +43,21 @@ hook.Add( "OnNPCKilled", "RON_Responsive_System_NPCKilled", function( npc, attac
 			timer.Simple( SoundDuration( CivilianKilled ) + 1, function() 
 				local ROEViolate = "ready_or_not/toc/roeviolate_"..math.random(0,25)..".wav"
 				TOC_Speak(ROEViolate)
+				
+				timer.Simple( SoundDuration( ROEViolate ), function() Speaking = false end)
 			end)
 		else
 			local SuspectKilled = "ready_or_not/swatjudge/suspectkilled_"..math.random(0,4)..".wav"
 			Judge_Speak(SuspectKilled)
 			
 			timer.Simple( SoundDuration( SuspectKilled ) + 1, function() 
-				local SuspectKilled = "ready_or_not/toc/death_"..math.random(0,19)..".wav"
+				local Death = "ready_or_not/toc/death_"..math.random(0,19)..".wav"
 				if math.random(0,1) == 1 then 
-					SuspectKilled = "ready_or_not/toc/acknowledgegeneric_"..math.random(0,23)..".wav"
+					Death = "ready_or_not/toc/acknowledgegeneric_"..math.random(0,23)..".wav"
 				end
-				TOC_Speak(SuspectKilled)
+				TOC_Speak(Death)
+				
+				timer.Simple( SoundDuration( Death ), function() Speaking = false end)
 			end)
 		end
 	else
@@ -57,6 +65,8 @@ hook.Add( "OnNPCKilled", "RON_Responsive_System_NPCKilled", function( npc, attac
 			timer.Simple( 1, function() 
 				local HostageKilled = "ready_or_not/toc/hostagekilled_"..math.random(0,9)..".wav"
 				PlayerAnnounce( HostageKilled )
+				
+				timer.Simple( SoundDuration( HostageKilled ), function() Speaking = false end)
 			end)
 		end
 	end
