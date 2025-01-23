@@ -34,9 +34,9 @@ end
 hook.Add( "OnNPCKilled", "RON_Responsive_System_NPCKilled", function( npc, attacker, inflictor )
 	if !GetConVar("ron_responsive_system_enabled"):GetBool() then return end
 	if Speaking then return end
-	Speaking = true
 	if attacker:IsPlayer() then 
 		if npc:Disposition( attacker ) == D_LI then
+			Speaking = true
 			local CivilianKilled = "ready_or_not/swatjudge/reportdeadcivilian_"..math.random(1,11)..".wav"
 			Judge_Speak(CivilianKilled)
 			
@@ -47,6 +47,7 @@ hook.Add( "OnNPCKilled", "RON_Responsive_System_NPCKilled", function( npc, attac
 				timer.Simple( SoundDuration( ROEViolate ), function() Speaking = false end)
 			end)
 		else
+			Speaking = true
 			local SuspectKilled = "ready_or_not/swatjudge/suspectkilled_"..math.random(0,4)..".wav"
 			Judge_Speak(SuspectKilled)
 			
@@ -62,6 +63,7 @@ hook.Add( "OnNPCKilled", "RON_Responsive_System_NPCKilled", function( npc, attac
 		end
 	else
 		if npc:Disposition( player.GetAll()[1] ) == D_LI then
+			Speaking = true
 			timer.Simple( 1, function() 
 				local HostageKilled = "ready_or_not/toc/hostagekilled_"..math.random(0,9)..".wav"
 				PlayerAnnounce( HostageKilled )
@@ -100,6 +102,7 @@ hook.Add("PopulateToolMenu","RON_RESPONSIVE_SYSTEM_MENU",function()
 		LanguageComboBox:SetValue("#ron.menu.subtitles_choose_language")
 		LanguageComboBox:AddChoice("English", "english", false, "flags16/us.png")
 		LanguageComboBox:AddChoice("简体中文", "schinese", false, "flags16/cn.png")
+		LanguageComboBox:AddChoice("日本語", "japanese", false, "flags16/jp.png")
 		LanguageComboBox.OnSelect = function( index, text, data )
 			RunConsoleCommand("ron_responsive_system_subtitle_language", LanguageComboBox:GetOptionData(text))
 			RunConsoleCommand("ron_subtitles_reload")
