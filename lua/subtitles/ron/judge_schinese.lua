@@ -2,9 +2,8 @@ RON_Subtitles_Table = RON_Subtitles_Table or {} -- don't touch
 
 local CharacterName = "判官："
 local CharacterColor = Color(0,127,255,255)
-local Language = "schinese"
 
-print(Language.." ".."Judge Loaded...")
+print("Schinese Judge Loaded...")
 
 local RONSubtitle = { -- add new tables inside here
 
@@ -13,7 +12,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "突入组呼叫指挥中心……", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 	
 	{
@@ -21,7 +19,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "领队呼叫指挥中心……", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 	
 	{
@@ -29,7 +26,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "战斗组呼叫指挥中心……", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 	
 	{
@@ -37,7 +33,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "指挥中心……", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 	
 	{
@@ -45,7 +40,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "嫌疑人倒地。", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 	
 	{
@@ -53,7 +47,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "他们倒地了。", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 	
 	{
@@ -61,7 +54,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "嫌疑人倒地。", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 	
 	{
@@ -69,7 +61,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "一名嫌疑人倒地。", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 	
 	{
@@ -77,7 +68,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "倒地。", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 	
 	{
@@ -85,7 +75,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "我们这边有一名平民倒地。", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 	
 	{
@@ -93,7 +82,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "平民死亡。重复。平民死亡。", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 	
 	{
@@ -101,7 +89,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "我们这里有平民死亡。", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 	
 	{
@@ -109,7 +96,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "我们这里有一名平民倒地。", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 	
 	{
@@ -117,7 +103,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "我们这里有平民死亡。通知跟进组。有平民在行动中死亡。", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 	
 	{
@@ -125,7 +110,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "我们这边有平民失去生命迹象。请求战术急救人员介入。", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 	
 	{
@@ -133,7 +117,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "一名平民无任何回应。", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 	
 	{
@@ -141,7 +124,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "报告，一名平民无生命迹象。", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 	
 	{
@@ -149,7 +131,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "平民死亡。", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 	
 	{
@@ -157,7 +138,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "一名平民倒地。", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 	
 	{
@@ -165,7 +145,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "我们这里有一名平民倒地。", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 
 }

@@ -5,10 +5,6 @@ CreateClientConVar( "ron_responsive_system_subtitle_language", "english" )
 RON_Subtitles_Table = RON_Subtitles_Table or {}
 local RON_SoundToSubtitle = {}
 
-local function RON_RegisterSubtitle(snd, text, duration)
-	RON_SoundToSubtitle[snd] = { text = text, duration = duration }
-end
-
 local function RON_CallSubtitle(path)
 	local sub = RON_SoundToSubtitle[path]
 	if not sub then return end	
@@ -27,18 +23,13 @@ local function RON_LoadSubtitles()
 	table.Empty(RON_Subtitles_Table)
 	table.Empty(RON_SoundToSubtitle)
 
-	for _, File in ipairs(file.Find("subtitles/ron/*.lua", "LUA") or {}) do
+	for _, File in ipairs(file.Find("subtitles/ron/*_"..GetConVar("ron_responsive_system_subtitle_language"):GetString()..".lua", "LUA") or {}) do
 		ProtectedCall(CompileFile("subtitles/ron/" .. File))
 	end
 
 	for _, v in pairs(RON_Subtitles_Table) do
 		for _, v2 in pairs(v) do
 			if not v2.snd or not v2.text then continue end
-
-			local Language = GetConVar("ron_responsive_system_subtitle_language"):GetString()
-			if !(v2.lang == nil or Language == v2.lang) then
-				continue 
-			end
 
 			local str = ""
 			if v2.closedcaption then
@@ -53,7 +44,7 @@ local function RON_LoadSubtitles()
 			local col = v2.textcol or color_white
 			str = str .. string.format("<clr:%d,%d,%d>%s", col.r, col.g, col.b, v2.text)
 
-			RON_RegisterSubtitle(v2.snd, str, SoundDuration(v2.snd))
+			RON_SoundToSubtitle[v2.snd] = { text = str, duration = SoundDuration(v2.snd) }
 		end
 	end
 end

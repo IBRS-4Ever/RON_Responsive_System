@@ -2,9 +2,8 @@ RON_Subtitles_Table = RON_Subtitles_Table or {} -- don't touch
 
 local CharacterName = "Judge: "
 local CharacterColor = Color(0,127,255,255)
-local Language = "english"
 
-print(Language.." ".."Judge Loaded...")
+print("English Judge Loaded...")
 
 local RONSubtitle = { -- add new tables inside here
 
@@ -13,7 +12,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "Entry Team to TOC...", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 	
 	{
@@ -21,7 +19,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "Lead to TOC...", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 	
 	{
@@ -29,7 +26,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "Element to TOC...", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 	
 	{
@@ -37,7 +33,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "TOC...", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 	
 	{
@@ -45,7 +40,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "Suspect down.", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 	
 	{
@@ -53,7 +47,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "They're down.", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 	
 	{
@@ -61,7 +54,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "Suspect is down.", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 	
 	{
@@ -69,7 +61,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "We got a suspect down.", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 	
 	{
@@ -77,7 +68,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "Down.", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 	
 	{
@@ -85,7 +75,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "We have a civilian down here.", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 	
 	{
@@ -93,7 +82,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "We lost a civilian. Repeat, civilian killed.", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 	
 	{
@@ -101,7 +89,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "We got a dead civilian here.", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 	
 	{
@@ -109,7 +96,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "We have one civilian down.", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 	
 	{
@@ -117,7 +103,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "We got a dead civilian here. Notify trailers, civilian is DOA.", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 	
 	{
@@ -125,7 +110,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "We got a deceased civilian. Requesting TEMS.", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 	
 	{
@@ -133,7 +117,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "One civilian unresponsive.", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 	
 	{
@@ -141,7 +124,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "Reporting one civilian deceased.", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 	
 	{
@@ -149,7 +131,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "Civilian is dead.", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 	
 	{
@@ -157,7 +138,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "One civilian down.", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 	
 	{
@@ -165,7 +145,6 @@ local RONSubtitle = { -- add new tables inside here
 		subject = CharacterName, 
 		text = "We have one civilian down.", 
 		subjectcol = CharacterColor,
-		lang = Language,
 	},
 
 }
