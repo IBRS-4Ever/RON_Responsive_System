@@ -1436,6 +1436,205 @@ local RONSubtitle = { -- add new tables inside here
 		subjectcol = CharacterColor,
 	},
 	
+	-- Complete
+	{
+		snd = "ready_or_not/toc/complete_0.wav", 
+		subject = CharacterName, 
+		text = {
+			["english"] = "Nice work entry team, first round's on me tonight.", 
+			["schinese"] = "干得漂亮，突入组，今晚我请大家喝酒。",
+			["japanese"] = "よくやった、突入班、今夜の1杯目は俺のおごりだ。",
+		},
+		subjectcol = CharacterColor,
+	},
+	
+	{
+		snd = "ready_or_not/toc/complete_1.wav", 
+		subject = CharacterName, 
+		text = {
+			["english"] = "Nicely done, entry team. Roll in.", 
+			["schinese"] = "不错，突入组。归队。",
+			["japanese"] = "よくやった、突入班。その調子だ。",
+		},
+		subjectcol = CharacterColor,
+	},
+	
+	{
+		snd = "ready_or_not/toc/complete_2.wav", 
+		subject = CharacterName, 
+		text = {
+			["english"] = "Put 'em on safe and let 'em hang. Great job.", 
+			["schinese"] = "收队的时候记得把枪械保险上好。干得漂亮。",
+			["japanese"] = "モードを安全に切り替えて、掛けておけ。よくやった。",
+		},
+		subjectcol = CharacterColor,
+	},
+	
+	{
+		snd = "ready_or_not/toc/complete_3.wav", 
+		subject = CharacterName, 
+		text = {
+			["english"] = "Excellent work, entry team. Report to center for debrief.", 
+			["schinese"] = "非常好，突入组。回中心去汇报吧。",
+			["japanese"] = "素晴らしい仕事ぶりだ、突入班。司令部に報告せよ。",
+		},
+		subjectcol = CharacterColor,
+	},
+	
+	{
+		snd = "ready_or_not/toc/complete_4.wav", 
+		subject = CharacterName, 
+		text = {
+			["english"] = "Great job, entry team. Come home for debrief.", 
+			["schinese"] = "很好，突入组。回来汇报吧。",
+			["japanese"] = "よくやった、突入班。報告会へ向かってくれ。",
+		},
+		subjectcol = CharacterColor,
+	},
+	
+	{
+		snd = "ready_or_not/toc/complete_5.wav", 
+		subject = CharacterName, 
+		text = {
+			["english"] = "Great work, entry team. That's a wrap.", 
+			["schinese"] = "很不错，突入组。归队。",
+			["japanese"] = "お疲れ、突入班。以上だ。",
+		},
+		subjectcol = CharacterColor,
+	},
+	
+	{
+		snd = "ready_or_not/toc/complete_6.wav", 
+		subject = CharacterName, 
+		text = {
+			["english"] = "Good job everyone, roll in.", 
+			["schinese"] = "大家都很不错，归队。",
+			["japanese"] = "みんな、お疲れ。その調子だ。",
+		},
+		subjectcol = CharacterColor,
+	},
+	
+	{
+		snd = "ready_or_not/toc/complete_7.wav", 
+		subject = CharacterName, 
+		text = {
+			["english"] = "Score one for the good guys. Good work, everyone.", 
+			["schinese"] = "好人砍下一分。大家都干得漂亮。",
+			["japanese"] = "英雄に1点ってな。みんな、よくやった。",
+		},
+		subjectcol = CharacterColor,
+	},
+	
+	{
+		snd = "ready_or_not/toc/complete_8.wav", 
+		subject = CharacterName, 
+		text = {
+			["english"] = "That's how we get it done, folks. Roll in for debrief.", 
+			["schinese"] = "伙计们，这就是我们的本事。归队汇报吧。",
+			["japanese"] = "みんな、その調子だ。報告会へ向かえ。",
+		},
+		subjectcol = CharacterColor,
+	},
+	
+	{
+		snd = "ready_or_not/toc/complete_9.wav", 
+		subject = CharacterName, 
+		text = {
+			["english"] = "Nice work entry team, first round's on me tonight.", 
+			["schinese"] = "干得漂亮，突入组，今晚我请大家喝酒。",
+			["japanese"] = "よくやった、突入班、今夜の1杯目は俺のおごりだ。",
+		},
+		subjectcol = CharacterColor,
+	},
+	
+	{
+		snd = "ready_or_not/toc/complete_10.wav", 
+		subject = CharacterName, 
+		text = {
+			["english"] = "Nicely done, entry team. Roll in.", 
+			["schinese"] = "不错，突入组。归队。",
+			["japanese"] = "よくやった、突入班。その調子だ。",
+		},
+		subjectcol = CharacterColor,
+	},
+	
+	{
+		snd = "ready_or_not/toc/complete_11.wav", 
+		subject = CharacterName, 
+		text = {
+			["english"] = "Put 'em on safe and let 'em hang. Great job.", 
+			["schinese"] = "收队的时候记得把枪械保险上好。干得漂亮。",
+			["japanese"] = "モードを安全に切り替えて、掛けておけ。よくやった。",
+		},
+		subjectcol = CharacterColor,
+	},
+	
+	{
+		snd = "ready_or_not/toc/complete_12.wav", 
+		subject = CharacterName, 
+		text = {
+			["english"] = "Excellent work, entry team. Report to center for debrief.", 
+			["schinese"] = "非常好，突入组。回中心去汇报吧。",
+			["japanese"] = "素晴らしい仕事ぶりだ、突入班。司令部に報告せよ。",
+		},
+		subjectcol = CharacterColor,
+	},
+	
+	{
+		snd = "ready_or_not/toc/complete_13.wav", 
+		subject = CharacterName, 
+		text = {
+			["english"] = "Great job, entry team. Come home for debrief.", 
+			["schinese"] = "很好，突入组。回来汇报吧。",
+			["japanese"] = "よくやった、突入班。報告会へ向かってくれ。",
+		},
+		subjectcol = CharacterColor,
+	},
+	
+	{
+		snd = "ready_or_not/toc/complete_14.wav", 
+		subject = CharacterName, 
+		text = {
+			["english"] = "Great work, entry team. That's a wrap.", 
+			["schinese"] = "很不错，突入组。归队。",
+			["japanese"] = "お疲れ、突入班。以上だ。",
+		},
+		subjectcol = CharacterColor,
+	},
+	
+	{
+		snd = "ready_or_not/toc/complete_15.wav", 
+		subject = CharacterName, 
+		text = {
+			["english"] = "Good job everyone, roll in.", 
+			["schinese"] = "大家都很不错，归队。",
+			["japanese"] = "みんな、お疲れ。その調子だ。",
+		},
+		subjectcol = CharacterColor,
+	},
+	
+	{
+		snd = "ready_or_not/toc/complete_16.wav", 
+		subject = CharacterName, 
+		text = {
+			["english"] = "Score one for the good guys. Good work, everyone.", 
+			["schinese"] = "好人砍下一分。大家都干得漂亮。",
+			["japanese"] = "英雄に1点ってな。みんな、よくやった。",
+		},
+		subjectcol = CharacterColor,
+	},
+	
+	{
+		snd = "ready_or_not/toc/complete_17.wav", 
+		subject = CharacterName, 
+		text = {
+			["english"] = "That's how we get it done, folks. Roll in for debrief.", 
+			["schinese"] = "伙计们，这就是我们的本事。归队汇报吧。",
+			["japanese"] = "みんな、その調子だ。報告会へ向かえ。",
+		},
+		subjectcol = CharacterColor,
+	},
+	
 }
 
 table.insert(RON_Subtitles_Table,RONSubtitle) -- don't touch

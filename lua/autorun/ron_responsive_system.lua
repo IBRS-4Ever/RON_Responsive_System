@@ -1,5 +1,6 @@
 
 CreateConVar( "ron_responsive_system_enabled", 1 , FCVAR_ARCHIVE + FCVAR_SERVER_CAN_EXECUTE + FCVAR_REPLICATED, "[RON Responsive System] Enable System.")
+CreateConVar( "ron_responsive_system_complete_voicelines", 0 , FCVAR_ARCHIVE + FCVAR_SERVER_CAN_EXECUTE + FCVAR_REPLICATED, "[RON Responsive System] Enable Complete Voicelines.")
 
 local Speaking = false
 
@@ -39,6 +40,9 @@ local BlacklistNPC = {
 	["npc_manhack"] = true,
 }
 
+local Suspects = {}
+local Civilians = {}
+
 local function PlayerAnnounce( Sound )
 	for i, player in ipairs( player.GetAll() ) do
 		player:EmitSound( Sound, 75, 100, 1, CHAN_VOICE )
@@ -67,9 +71,32 @@ local function Judge_Speak( Sound, Delay )
 	end)
 end
 
+hook.Add( "OnEntityCreated", "RON_Responsive_System_CheckNPC", function(ent) 
+	if CLIENT then return end
+	if !ent:IsNPC() then return end
+	if !ent:IsValid() then return end
+	if BlacklistNPC[ent:GetClass()] then return end
+	if ent:Disposition( player.GetAll()[1] ) == D_LI then Civilians[ent] = true end
+	if ent:Disposition( player.GetAll()[1] ) == D_HT then Suspects[ent] = true end
+	--PrintTable(Civilians)
+	--print("-------------------------------")
+	--PrintTable(Suspects)
+end)
+
 hook.Add( "OnNPCKilled", "RON_Responsive_System_NPCKilled", function( npc, attacker, inflictor )
 	if BlacklistNPC[npc:GetClass()] then return end
 	if !GetConVar("ron_responsive_system_enabled"):GetBool() then return end
+	if GetConVar("ron_responsive_system_complete_voicelines"):GetBool() then
+		if Suspects[npc] then
+			Suspects[npc] = nil 
+			local SusTable = table.GetKeys( Suspects )
+			if #SusTable <= 0 then
+				local Complete = "ready_or_not/toc/complete_"..math.random(0,17)..".wav"
+				TOC_Speak(Complete)
+				return
+			end
+		end
+	end
 	if Speaking then return end
 	if attacker:IsPlayer() then 
 		if npc:Disposition( attacker ) == D_LI then
@@ -81,7 +108,7 @@ hook.Add( "OnNPCKilled", "RON_Responsive_System_NPCKilled", function( npc, attac
 				local ROEViolate = "ready_or_not/toc/roeviolate_"..math.random(0,25)..".wav"
 				TOC_Speak(ROEViolate)
 				
-				timer.Simple( SoundDuration( ROEViolate ), function() Speaking = false end)
+				timer.Simple( SoundDuration( ROEViolate ) + 1, function() Speaking = false end)
 			end)
 		else
 			Speaking = true
@@ -95,7 +122,7 @@ hook.Add( "OnNPCKilled", "RON_Responsive_System_NPCKilled", function( npc, attac
 				end
 				TOC_Speak(Death)
 				
-				timer.Simple( SoundDuration( Death ), function() Speaking = false end)
+				timer.Simple( SoundDuration( Death ) + 1, function() Speaking = false end)
 			end)
 		end
 	else
@@ -105,7 +132,7 @@ hook.Add( "OnNPCKilled", "RON_Responsive_System_NPCKilled", function( npc, attac
 				local HostageKilled = "ready_or_not/toc/hostagekilled_"..math.random(0,9)..".wav"
 				PlayerAnnounce( HostageKilled )
 				
-				timer.Simple( SoundDuration( HostageKilled ), function() Speaking = false end)
+				timer.Simple( SoundDuration( HostageKilled ) + 1, function() Speaking = false end)
 			end)
 		end
 	end
@@ -125,6 +152,13 @@ hook.Add( "PlayerSpawn", "RON_Responsive_System_PlayerSpawn", function( victim, 
 	TOC_Speak(Start)
 end)
 
+hook.Add( "Think", "RON_Responsive_System_Think", function() 
+	if !GetConVar("ron_responsive_system_enabled"):GetBool() then return end
+	local SusTable = table.GetKeys( Suspects )
+	for i = 1, #SusTable do
+		if !IsValid(SusTable[i]) then Suspects[SusTable[i]] = nil end
+	end
+end)
 
 hook.Add("AddToolMenuTabs", "RON_RESPONSIVE_SYSTEM_ADDMENU", function()
 	spawnmenu.AddToolCategory("Options", "RON Responsive System Settings", "#ron.menu.ron_settings")
@@ -132,7 +166,11 @@ end)
 
 hook.Add("PopulateToolMenu","RON_RESPONSIVE_SYSTEM_MENU",function()
 	spawnmenu.AddToolMenuOption("Options", "RON Responsive System Settings", "RON_Settings", "#ron.menu.settings","","",function(pnl)
-		if game.SinglePlayer() or LocalPlayer():IsAdmin() then pnl:AddControl("Checkbox", {Label = "#ron.menu.settings.enabled", Command = "ron_responsive_system_enabled"}) end
+		if game.SinglePlayer() or LocalPlayer():IsAdmin() then 
+			pnl:AddControl("Checkbox", {Label = "#ron.menu.settings.enabled", Command = "ron_responsive_system_enabled"}) 
+			pnl:AddControl("Checkbox", {Label = "#ron.menu.settings.complete_voicelines", Command = "ron_responsive_system_complete_voicelines"}) 
+		end
+		
 		pnl:AddControl("Checkbox", {Label = "#ron.menu.settings.subtitles", Command = "ron_responsive_system_subtitle"})
 		local LanguageComboBox = vgui.Create("DComboBox")
 		LanguageComboBox:SetSize(100, 30)
