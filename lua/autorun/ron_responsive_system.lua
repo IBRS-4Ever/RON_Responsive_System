@@ -3,6 +3,42 @@ CreateConVar( "ron_responsive_system_enabled", 1 , FCVAR_ARCHIVE + FCVAR_SERVER_
 
 local Speaking = false
 
+local BlacklistNPC = {
+	
+	["npc_barnacle"] = true,
+	
+	-- Zombies
+	["npc_zombie"] = true,
+	["npc_zombie_torso"] = true,
+	["npc_fastzombie"] = true,
+	["npc_fastzombie_torso"] = true,
+	["npc_poisonzombie"] = true,
+	["npc_zombine"] = true,
+	
+	-- Headcrabs
+	["npc_headcrab"] = true,
+	["npc_headcrab_fast"] = true,
+	["npc_headcrab_black"] = true,
+	["npc_headcrab_poison"] = true,
+	
+	-- Antlions
+	["npc_antlion"] = true,
+	["npc_antlion_worker"] = true,
+	["npc_antlionguard"] = true,
+	
+	-- Birds
+	["npc_crow"] = true,
+	["npc_pigeon"] = true,
+	["npc_seagull"] = true,
+	
+	-- Combine
+	["npc_clawscanner"] = true,
+	["npc_cscanner"] = true,
+	["npc_rollermine"] = true,
+	["npc_turret_floor"] = true,
+	["npc_manhack"] = true,
+}
+
 local function PlayerAnnounce( Sound )
 	for i, player in ipairs( player.GetAll() ) do
 		player:EmitSound( Sound, 75, 100, 1, CHAN_VOICE )
@@ -32,6 +68,7 @@ local function Judge_Speak( Sound, Delay )
 end
 
 hook.Add( "OnNPCKilled", "RON_Responsive_System_NPCKilled", function( npc, attacker, inflictor )
+	if BlacklistNPC[npc:GetClass()] then return end
 	if !GetConVar("ron_responsive_system_enabled"):GetBool() then return end
 	if Speaking then return end
 	if attacker:IsPlayer() then 
@@ -103,10 +140,14 @@ hook.Add("PopulateToolMenu","RON_RESPONSIVE_SYSTEM_MENU",function()
 		LanguageComboBox:AddChoice("English", "english", false, "flags16/us.png")
 		LanguageComboBox:AddChoice("简体中文", "schinese", false, "flags16/cn.png")
 		LanguageComboBox:AddChoice("日本語", "japanese", false, "flags16/jp.png")
+		LanguageComboBox:AddChoice("한국어", "korean", false, "flags16/kr.png")
+		LanguageComboBox:AddChoice("Русский", "russian", false, "flags16/ru.png")
+		LanguageComboBox:AddChoice("Deutsch", "germany", false, "flags16/de.png")
 		LanguageComboBox.OnSelect = function( index, text, data )
 			RunConsoleCommand("ron_responsive_system_subtitle_language", LanguageComboBox:GetOptionData(text))
 			RunConsoleCommand("ron_subtitles_reload")
 		end
 		pnl:AddPanel(LanguageComboBox)
+		pnl:AddControl("Label", { Text = "#ron.menu.subtitles_language_unfinished" })
 	end)
 end)

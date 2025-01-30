@@ -20,10 +20,11 @@ net.Receive("RON_RESPONSIVE_SYSTEM_SUBTITLE_SOUND", function()
 end)
 
 local function RON_LoadSubtitles()
+	local Lang = GetConVar("ron_responsive_system_subtitle_language"):GetString()
 	table.Empty(RON_Subtitles_Table)
 	table.Empty(RON_SoundToSubtitle)
 
-	for _, File in ipairs(file.Find("subtitles/ron/*_"..GetConVar("ron_responsive_system_subtitle_language"):GetString()..".lua", "LUA") or {}) do
+	for _, File in ipairs(file.Find("subtitles/ron/*.lua", "LUA") or {}) do
 		ProtectedCall(CompileFile("subtitles/ron/" .. File))
 	end
 
@@ -32,17 +33,15 @@ local function RON_LoadSubtitles()
 			if not v2.snd or not v2.text then continue end
 
 			local str = ""
-			if v2.closedcaption then
-				str = str .. "<sfx>"
-			end
+
 			if v2.subject then
 				local col = v2.subjectcol or color_white
 
-				str = str .. string.format("<clr:%d,%d,%d>%s", col.r, col.g, col.b, v2.subject)
+				str = str .. string.format("<clr:%d,%d,%d>%s", col.r, col.g, col.b, v2.subject[Lang] or v2.subject["english"] or v2.subject)
 			end
 
 			local col = v2.textcol or color_white
-			str = str .. string.format("<clr:%d,%d,%d>%s", col.r, col.g, col.b, v2.text)
+			str = str .. string.format("<clr:%d,%d,%d>%s", col.r, col.g, col.b, v2.text[Lang] or v2.text["english"] or v2.text)
 
 			RON_SoundToSubtitle[v2.snd] = { text = str, duration = SoundDuration(v2.snd) }
 		end
