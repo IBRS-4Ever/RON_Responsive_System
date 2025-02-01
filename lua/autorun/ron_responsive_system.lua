@@ -75,6 +75,7 @@ hook.Add( "OnEntityCreated", "RON_Responsive_System_CheckNPC", function(ent)
 	if CLIENT then return end
 	if !ent:IsNPC() then return end
 	if !ent:IsValid() then return end
+	if !IsValid(player.GetAll()[1]) then return end
 	if BlacklistNPC[ent:GetClass()] then return end
 	if ent:Disposition( player.GetAll()[1] ) == D_LI then Civilians[ent] = true end
 	if ent:Disposition( player.GetAll()[1] ) == D_HT then Suspects[ent] = true end
