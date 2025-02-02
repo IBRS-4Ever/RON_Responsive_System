@@ -72,11 +72,7 @@ local function Judge_Speak( Sound, Delay )
 end
 
 hook.Add( "OnEntityCreated", "RON_Responsive_System_CheckNPC", function(ent) 
-	if CLIENT then return end
-	if !ent:IsNPC() then return end
-	if !ent:IsValid() then return end
-	if !IsValid(player.GetAll()[1]) then return end
-	if BlacklistNPC[ent:GetClass()] then return end
+	if CLIENT or !ent:IsNPC() or !ent:IsValid() or !IsValid(player.GetAll()[1]) or BlacklistNPC[ent:GetClass()] then return end
 	if ent:Disposition( player.GetAll()[1] ) == D_LI then Civilians[ent] = true end
 	if ent:Disposition( player.GetAll()[1] ) == D_HT then Suspects[ent] = true end
 	--PrintTable(Civilians)
@@ -182,6 +178,12 @@ hook.Add("PopulateToolMenu","RON_RESPONSIVE_SYSTEM_MENU",function()
 		LanguageComboBox:AddChoice("한국어", "korean", false, "flags16/kr.png")
 		LanguageComboBox:AddChoice("Русский", "russian", false, "flags16/ru.png")
 		LanguageComboBox:AddChoice("Deutsch", "germany", false, "flags16/de.png")
+		LanguageComboBox:AddChoice("Español", "spanish", false, "flags16/es.png")
+		LanguageComboBox:AddChoice("Français", "french", false, "flags16/fr.png")
+		LanguageComboBox:AddChoice("Italiano", "italian", false, "flags16/it.png")
+		LanguageComboBox:AddChoice("Język polski", "polish", false, "flags16/pl.png")
+		LanguageComboBox:AddChoice("Português", "portuguese", false, "flags16/pt.png")
+		LanguageComboBox:AddChoice("Türkçe", "turkish", false, "flags16/tr.png")
 		LanguageComboBox.OnSelect = function( index, text, data )
 			RunConsoleCommand("ron_responsive_system_subtitle_language", LanguageComboBox:GetOptionData(text))
 			RunConsoleCommand("ron_subtitles_reload")
