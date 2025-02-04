@@ -98,15 +98,24 @@ hook.Add( "OnNPCKilled", "RON_Responsive_System_NPCKilled", function( npc, attac
 	if attacker:IsPlayer() then 
 		if npc:Disposition( attacker ) == D_LI then
 			Speaking = true
-			local CivilianKilled = "ready_or_not/swatjudge/reportdeadcivilian_"..math.random(1,11)..".wav"
-			Judge_Speak(CivilianKilled)
-			
-			timer.Simple( SoundDuration( CivilianKilled ) + 1, function() 
-				local ROEViolate = "ready_or_not/toc/roeviolate_"..math.random(0,25)..".wav"
-				TOC_Speak(ROEViolate)
+			--[[
+			if npc:GetActiveWeapon() != NULL then 
+				local OfficerKilled = "ready_or_not/swatjudge/reportdeadswat_"..math.random(1,11)..".wav"
+				Judge_Speak(OfficerKilled)
 				
-				timer.Simple( SoundDuration( ROEViolate ) + 1, function() Speaking = false end)
-			end)
+				timer.Simple( SoundDuration( OfficerKilled ) + 1, function() Speaking = false end)
+			else
+			]]
+				local CivilianKilled = "ready_or_not/swatjudge/reportdeadcivilian_"..math.random(1,11)..".wav"
+				Judge_Speak(CivilianKilled)
+				
+				timer.Simple( SoundDuration( CivilianKilled ) + 1, function() 
+					local ROEViolate = "ready_or_not/toc/roeviolate_"..math.random(0,25)..".wav"
+					TOC_Speak(ROEViolate)
+					
+					timer.Simple( SoundDuration( ROEViolate ) + 1, function() Speaking = false end)
+				end)
+			--end
 		else
 			Speaking = true
 			local SuspectKilled = "ready_or_not/swatjudge/suspectkilled_"..math.random(0,4)..".wav"
