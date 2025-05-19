@@ -47,5 +47,6 @@ local function RON_LoadSubtitles()
 		end
 	end
 end
-concommand.Add("ron_subtitles_reload", RON_LoadSubtitles)
+cvars.AddChangeCallback("ron_responsive_system_subtitle_language", RON_LoadSubtitles)
+
 hook.Add("InitPostEntity", "RON_RESPONSIVE_SYSTEM_SUBTITLE_INIT", RON_LoadSubtitles)
